@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS tenders (
     id          BIGSERIAL PRIMARY KEY,
-    tender_no   VARCHAR(50) NOT NULL UNIQUE,
+    tender_no   VARCHAR(50) NOT NULL,
     department  TEXT NOT NULL,
     title       TEXT NOT NULL,
     status      VARCHAR(30) NOT NULL DEFAULT 'Published',
@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS tenders (
     due_days    VARCHAR(20),
     pdf_link    TEXT,
     created_at  TIMESTAMPTZ DEFAULT NOW(),
-    updated_at  TIMESTAMPTZ DEFAULT NOW()
+    updated_at  TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (tender_no, department)
 );
 
 -- Indexes for performance

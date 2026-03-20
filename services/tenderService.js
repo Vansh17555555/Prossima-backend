@@ -68,8 +68,7 @@ const tenderService = {
       INSERT INTO tenders (
         tender_no, department, title, status, work_area, due_at, due_days, pdf_link, updated_at
       ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
-      ON CONFLICT (tender_no) DO UPDATE SET
-        department = EXCLUDED.department,
+      ON CONFLICT (tender_no, department) DO UPDATE SET
         title = EXCLUDED.title,
         status = EXCLUDED.status,
         work_area = EXCLUDED.work_area,
