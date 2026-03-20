@@ -22,8 +22,8 @@ const tenderService = {
       baseQuery += ` AND work_area = $${params.length}`;
     }
     if (q) {
-      params.push(q);
-      baseQuery += ` AND to_tsvector('english', title) @@ plainto_tsquery('english', $${params.length})`;
+      params.push(`%${q}%`);
+      baseQuery += ` AND (tender_no ILIKE $${params.length} OR department ILIKE $${params.length} OR title ILIKE $${params.length})`;
     }
 
     // Get total count for these filters
